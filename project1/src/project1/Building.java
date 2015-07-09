@@ -15,14 +15,15 @@ public class Building {
 				flr=new Floor();
 				
 				for(int i=0;i<6;i++){
-					Floors.add(new Floor());
+			       addFloor(i);
 					Floors.get(i).setFloorValue(i);
 				}
 				
 			}
 		
 			public boolean addFloor(int Floornum){
-				if(this.addFloor(Floornum)){
+				if(Floors.add(new Floor())){
+					flr.setFloorValue(Floornum);
 					return true;
 				}
 				else
@@ -31,12 +32,12 @@ public class Building {
 			}
 			
 			public void ElevatorService(){
-				String choice;
+				String choice=null;
 				do{
 				ele.ElevatorService(ele, Floors);
 				System.out.println("Do you want to use elevator any more? Y-yes N-No ");
-				choice=sc.next();
-				}while(!choice.equalsIgnoreCase("Y"));
+				choice=sc.nextLine();
+				}while(!choice.equals("Y"));
 			
 				
 			}

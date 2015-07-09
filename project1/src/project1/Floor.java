@@ -25,11 +25,11 @@ public class Floor {
 			FloorValue = floorValue;
 		}
 		
-		public void OpenDoor(){
-			od.Action(FloorDoor);
+		public void OpenDoor(String type){
+			od.Action(FloorDoor,type);
 		}
 
-		public void CloseDoor(){
-			cd.Action(FloorDoor);
+		public void CloseDoor(String type){
+			cd.Action(FloorDoor,type);
 		}
 }

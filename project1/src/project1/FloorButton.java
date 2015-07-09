@@ -4,11 +4,11 @@ public class FloorButton implements Button{
 
 	boolean status;
 
-	public void goUp(Elevator Ele){
-		Ele.Goup();
+	public void goUp(Elevator Ele,int num){
+		Ele.Goup(num);
 	}
 
-	public void goDown(Elevator Ele) {
-		Ele.Godown();
+	public void goDown(Elevator Ele,int num) {
+		Ele.Godown(num);
 	}
 }

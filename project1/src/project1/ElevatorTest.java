@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class ElevatorTest {
     Elevator ele=new Elevator();
-	ArrayList<Floor> Floors=new ArrayList<Floor>();
+	ArrayList<Floor> Flrs=new ArrayList<Floor>();
 
 	@Test
 	public void testCheckfloor() {
-		assertEquals(true,ele.checkfloor(0, Floors));
+		assertEquals(false,ele.checkfloor(3, Flrs));
 	}
 
 }

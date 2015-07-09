@@ -33,13 +33,13 @@ public class Elevator {
 			return ele;
 	}
 
-	public int Goup(){
-		return currentFloor++;
+	public void Goup(int destination){
+		currentFloor=destination;
 
 	}
 
-	public int Godown(){
-		return currentFloor--;
+	public void Godown(int destination){
+		currentFloor=destination;
 
 	}
 
@@ -51,12 +51,12 @@ public class Elevator {
 		this.currentFloor = currentFloor;
 	}
 
-	public void OpenDoor(){
-		od.Action(ElevatorDoor);
+	public void OpenDoor(String type){
+		od.Action(ElevatorDoor,type);
 	}
 
-	public void CloseDoor(){
-		cd.Action(ElevatorDoor);
+	public void CloseDoor(String type){
+		cd.Action(ElevatorDoor,type);
 	}
 
 	public void Click(int index){
@@ -70,31 +70,46 @@ public class Elevator {
 		do{
 			currentFloor=ele.getCurrentFloor();
 			if(floor>currentFloor){
-				currentFloor=ele.Goup();
+				ele.Goup(floor);
+				currentFloor++;
 				ele.setCurrentFloor(currentFloor);
+				System.out.println("elevator on Floor no "+currentFloor);
 			}
 			if(floor<currentFloor){
-				currentFloor=ele.Godown();
+				ele.Godown(floor);
+				currentFloor--;
 				ele.setCurrentFloor(currentFloor);
+				System.out.println("elevator on Floor no "+currentFloor);
 			}
 		}while(currentFloor!=floor);
 		if(currentFloor==floor){
-			ele.OpenDoor();
-			Floors.get(currentFloor).OpenDoor();
-			Floors.get(currentFloor).CloseDoor();
-			ele.CloseDoor();
+			ele.OpenDoor("Elevator");
+			Floors.get(currentFloor).OpenDoor("Floor");
+			Floors.get(currentFloor).CloseDoor("Floor");
+			ele.CloseDoor("Elevator");
 			destination=getUserDestination(Floors);
 			do{
 				currentFloor=ele.getCurrentFloor();
 				if(destination>currentFloor){
-					currentFloor=ele.Goup();
+					ele.Goup(destination);
+					currentFloor++;
 					ele.setCurrentFloor(currentFloor);
+					System.out.println("elevator on Floor no "+currentFloor);
 				}
 				if(destination<currentFloor){
-					currentFloor=ele.Godown();
+					ele.Godown(destination);
+					currentFloor--;
 					ele.setCurrentFloor(currentFloor);
+					System.out.println("elevator on Floor no "+currentFloor);
 				}
-			}while(currentFloor!=floor);
+			}while(currentFloor!=destination);
+			
+			if(currentFloor==floor){
+				ele.OpenDoor("Elevator");
+				Floors.get(currentFloor).OpenDoor("Floor");
+				Floors.get(currentFloor).CloseDoor("Floor");
+				ele.CloseDoor("Elevator");
+			}
 		}
 
 	}
@@ -115,11 +130,11 @@ public class Elevator {
 	}
 
 	public boolean checkfloor(int floornum,ArrayList<Floor> Floors){
-		boolean status = false;
+		boolean status=false;
 		for(int flr=0 ; flr < Floors.size(); flr++){
 
 			if(Floors.get(flr).getFloorValue() == floornum)
-				status= true;
+				status=true;
 		}
 		return status;
 	}
